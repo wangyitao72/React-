@@ -3,14 +3,12 @@ import {lazy} from 'react'
 const Index = lazy(()=> import('../views/Index/Index'))
 const Login = lazy(()=> import('../views/Login/Login'))
 const Register = lazy(()=>import('../views/Register/Register'))
-// import Index from '../views/Index/Index'
-// import Login from '../views/Login/Login'
-// import Register from '../views/Register/Register'
-
 const Home = lazy(()=>import('../views/Home/Home'))
 const ListView = lazy(()=>import('../views/ListView/ListView'))
-const Test = lazy(()=>import('../views/Test/Test'))
-
+const AddAdmin = lazy(()=>import('../views/AddAdmin/AddAdmin'))
+const AddRelic = lazy(()=>import('../views/AddRelic/AddRelic'))
+const Extract = lazy(()=>import('../views/Extract/Extract')) 
+const Approval = lazy(()=>import('../views/Approval/Approval'))
 
 const routes = [
     {
@@ -28,19 +26,41 @@ const routes = [
                 },
             },
             {
-                path:'list',
+                path:'/relic/list',
                 component:ListView,
                 meta:{
                     auth:true
                 },
             },
             {
-                path:'action/test',
-                component:Test,
+                path:'/relic/addrelic',
+                component:AddRelic,
                 meta:{
                     auth:true
                 },
-            }
+            },
+            {
+                path:'/relic/extract',
+                component:Extract,
+                meta:{
+                    auth:true
+                },
+            },
+            {
+                path:'/action/addadmin',
+                component:AddAdmin,
+                meta:{
+                    auth:true
+                },
+            },
+            {
+                path:'/action/approval',
+                component:Approval,
+                meta:{
+                    auth:true
+                },
+            },
+            
         ]
     },
     {

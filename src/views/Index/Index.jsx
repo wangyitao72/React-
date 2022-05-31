@@ -1,11 +1,15 @@
 import {
-  AppstoreOutlined,
+  LaptopOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  RobotOutlined,
-  BankOutlined,
+  UserAddOutlined,
   HomeOutlined,
-  BorderlessTableOutlined,
+  AntDesignOutlined,
+  DatabaseOutlined,
+  SendOutlined,
+  ImportOutlined,
+  IdcardOutlined,
+  CodeSandboxOutlined,
 } from '@ant-design/icons';
 import { Layout, Menu, Spin, Breadcrumb } from 'antd';
 import React, { useState, useEffect, Suspense } from 'react';
@@ -22,6 +26,7 @@ export default function Index() {
   let navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const [username, setUsername] = useState('')
+  const [role, setRole] = useState('')
   const location = useLocation();
   const match = location.pathname.match(/^\/[a-z]+/);
   let prevPathname = '';
@@ -42,7 +47,37 @@ export default function Index() {
     setUsername(
       decode.username
     )
+    setRole(
+      decode.role
+    )
   }, [])
+
+  let board = () => {
+    switch (location.pathname) {
+      case '/action/addadmin':
+        return <div>管理员操作  /  新增成员</div>
+      case '/action/approval':
+        return <div>管理员操作  /  文物审批</div>
+      case '/relic/list':
+        return <div>文物管理  /  文物列表</div>
+      case '/home':
+        return <div>个人信息</div>
+      case '/relic/addrelic':
+        return <div>文物管理  /  添加文物</div>
+      case '/relic/extract':
+        return <div>文物管理  /  取出文物</div>
+
+      default:
+        return <div>您进入到未知的领域了呢</div>
+    }
+  }
+  let auth = () => {
+    if (role === '管理员') {
+      return false;
+    } else {
+      return true
+    }
+  }
   return (
     <Layout className='Index'>
 
@@ -56,26 +91,49 @@ export default function Index() {
           items={[
             {
               key: '/home',
-              icon: <BankOutlined />,
-              label: <Link to={'/home'}>Home</Link>
+              icon: <IdcardOutlined />,
+              label: <Link to={'/home'}>个人信息</Link>
             },
             {
-              key: '/list',
-              icon: <BorderlessTableOutlined />,
-              label: <Link to={'/list'}>List</Link>
-
+              key: '/relic',
+              icon: <AntDesignOutlined />,
+              label: '文物管理',
+              children: [
+                {
+                  key: '/relic/list',
+                  icon: <DatabaseOutlined />,
+                  label: <Link to={'/relic/list'}>文物列表</Link>
+                },
+                {
+                  key: '/relic/addrelic',
+                  icon: <SendOutlined />,
+                  label: <Link to={'/relic/addrelic'}>添加文物</Link>
+                },
+                {
+                  key: '/relic/extract',
+                  icon: <ImportOutlined />,
+                  label: <Link to={'/relic/extract'}>取出文物</Link>
+                }
+              ]
             },
             {
               key: '/action',
-              icon: <AppstoreOutlined />,
-              label: '没想好写啥功能',
+              icon: <LaptopOutlined />,
+              label: '管理员操作',
+              disabled: auth(),
               children: [
                 {
-                  key: '/action/test',
-                  icon: <RobotOutlined />,
-                  label: <Link to={'/action/test'}>Test</Link>
-                }
-              ]
+                  key: '/action/addadmin',
+                  icon: <UserAddOutlined />,
+                  label: <Link to={'/action/addadmin'}>新增成员</Link>
+                },
+                {
+                  key: '/action/approval',
+                  icon: <CodeSandboxOutlined />,
+                  label: <Link to={'/action/approval'}>文物审批</Link>
+                },
+              ],
+
             },
           ]}
         />
@@ -98,7 +156,11 @@ export default function Index() {
               <HomeOutlined />
             </Breadcrumb.Item>
             <Breadcrumb.Item>
-              <a href={location.pathname}>{(location.pathname).substr(1)}</a>
+              {/* <a href={location.pathname}>{(location.pathname).substr(1)}</a> */}
+
+              {
+                board()
+              }
             </Breadcrumb.Item>
           </Breadcrumb>
         </Header>

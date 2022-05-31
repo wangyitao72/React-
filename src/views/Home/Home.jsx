@@ -88,7 +88,7 @@ useEffect(()=>{
         }}
       >
         <Button type="primary" htmlType="submit" className='btn'>
-          Submit
+          更新
         </Button>
       </Form.Item>
     </Form>

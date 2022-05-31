@@ -3,8 +3,7 @@ let jwt = require('jsonwebtoken')
 
 let addUser = (req,res,next) =>{
 
-    // console.log(req.body)
-    req.body.role = '员工'
+    console.log(req.body)
     Module(req.body).save().then(ret=>{
         if(ret){
             res.send({"errcode":0})

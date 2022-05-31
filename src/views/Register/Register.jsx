@@ -11,7 +11,7 @@ export default function Register() {
 
   const onFinish = (values) => {
     console.log('Success:', values);
-
+    values.role = "员工"
     dispatch(register(values)).then((res)=>{
         console.log(res)
     })
