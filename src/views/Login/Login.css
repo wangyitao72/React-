@@ -1,0 +1,10 @@
+.Login {
+  width: 500px;
+  margin: 0 auto;
+  position: relative;
+  top: 100px;
+}
+
+.Login .rbtn {
+  float: right;
+}
