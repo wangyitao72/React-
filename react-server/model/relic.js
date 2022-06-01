@@ -3,7 +3,8 @@ let Schema = new mongoose.Schema({        //设定规则   required：必须写 
     relicname:{type:String,required:true,unique:true},
     years:{type:String,required:true},
     integrity:{type:String},
-    level:{type:String}
+    level:{type:String},
+    state:{type:String}
 })
 
 let userModule = mongoose.model('relic',Schema)    //生成模型
